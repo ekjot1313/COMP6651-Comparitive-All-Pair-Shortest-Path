@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class Main {
-    static final String pathToDataset = "C:\\Users\\Ekjot\\IdeaProjects\\COMP6651-Project\\dist.txt";
+    static final String pathToDataset = "dist.txt";
     static int vertices = 0;
 
     public static void main(String[] args) throws IOException {
         int[][] distAdjMatrix = getDistAdjMatrixFromDataset();
 
+        System.out.println("Original Adjacency Matrix:");
         printMatrix(distAdjMatrix);
 
         AllPairShortestPath dijkstra = new AllPairDijkstra();
@@ -19,8 +20,12 @@ public class Main {
         int[][] d_SDAM = dijkstra.getShortestDistAdjMatix(distAdjMatrix);
         int[][] fw_SDAM = floydWarshall.getShortestDistAdjMatix(distAdjMatrix);
         int[][] j_SDAM = johnson.getShortestDistAdjMatix(distAdjMatrix);
-        System.out.println();
+
+        System.out.println("\nDijkstra:");
         printMatrix(d_SDAM);
+
+        System.out.println("\nFloyd-Warshall:");
+        printMatrix(fw_SDAM);
     }
 
     private static void printMatrix(int[][] matrix) {
