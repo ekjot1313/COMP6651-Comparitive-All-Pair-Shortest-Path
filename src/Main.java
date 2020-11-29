@@ -17,15 +17,18 @@ public class Main {
         AllPairShortestPath floydWarshall = new FloydWarshall();
         AllPairShortestPath johnson = new Johnson();
 
-        int[][] d_SDAM = dijkstra.getShortestDistAdjMatix(distAdjMatrix);
+        
         int[][] fw_SDAM = floydWarshall.getShortestDistAdjMatix(distAdjMatrix);
         int[][] j_SDAM = johnson.getShortestDistAdjMatix(distAdjMatrix);
-
+        int[][] d_SDAM = dijkstra.getShortestDistAdjMatix(distAdjMatrix);
         System.out.println("\nDijkstra:");
         printMatrix(d_SDAM);
 
         System.out.println("\nFloyd-Warshall:");
         printMatrix(fw_SDAM);
+  
+        System.out.println("\nJohnson:");
+        printMatrix(j_SDAM);
     }
 
     private static void printMatrix(int[][] matrix) {

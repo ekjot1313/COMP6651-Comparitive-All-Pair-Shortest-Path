@@ -1,18 +1,26 @@
 public class Dijkstra {
     static final int INFINITY = Integer.MAX_VALUE;
 
-    static int[] getShortestDistArray(int[][] distAdjMatrix, int sourceVertex) {
+    static int[] getShortestDistArray(int[][] distAdjMatrix, int sourceVertex,int flag) {
         int vertices = distAdjMatrix.length;
         int[] dist = new int[vertices];
         boolean[] spt = new boolean[vertices];
-
+        if(flag==1)
         //initializing all distances to infinity
+        	vertices = distAdjMatrix.length-1;
+        else
+        		vertices = distAdjMatrix.length;
         for (int i = 0; i < vertices; i++)
             dist[i] = INFINITY;
 
         //starting from source vertex
         dist[sourceVertex] = 0;
-
+        for (int j = 0; j < vertices; j++) {
+        	if(distAdjMatrix[sourceVertex][j] ==0) {
+        		spt[j]=true;
+        		dist[j]=0;
+        	}
+        }
         //for each vertex
         for (int i = 0; i < vertices; i++) {
             //get minimum distance vertex
@@ -35,7 +43,6 @@ public class Dijkstra {
 
 
         }
-
         return dist;
     }
 
