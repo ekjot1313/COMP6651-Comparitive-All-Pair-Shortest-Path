@@ -5,10 +5,12 @@ public class AStar{
 
     static class Vertex implements Comparable{
         public Vertex prev;
+        public int v;
         public double g,h;
 
-        Vertex(Vertex prev, double g, double h){
+        Vertex(Vertex prev, int v, double g, double h){
             this.prev = prev;
+            this.v = v;
             this.g = g;
             this.h = h;
         }
@@ -29,6 +31,7 @@ public class AStar{
 
         openList.add(sourceVertex); //add source vertex to the open list
 
+        Vertex srcVertex = new Vertex(null, sourceVertex, 0, 0);
         dist[sourceVertex] = 0;
         //iterate through every node other than source node
         for (int i = 0; i < vertices; i++){
@@ -40,8 +43,8 @@ public class AStar{
                 //repeat while destination vertex has not yet been reached
                 while( !(openList.isEmpty()) ){
                     for (int j =0; j < vertices; j++){
-                        if (i != j){
-                            
+                        if (i == j){
+
                         }
                     }
                 }
