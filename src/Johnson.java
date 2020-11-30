@@ -20,25 +20,25 @@ public class Johnson implements AllPairShortestPath{
         source=vertices;
         for(int i=0;i<=source;i++)
 			distance[i]=0;
+        distance[source]=0;
         boolean b=BellmanFord(dist,vertices,distance);
-        //System.out.println(b);
         if (b== true)
         {
         	for(int m=0;m<vertices;m++)
     			for(int n=0;n<vertices;n++)
     			{	if(m!=n && dist[m][n]!=INFINITY)
     						dist[m][n]=	dist[m][n] + distance[m] - distance[n];	
-    			    else
-    			    	dist[m][n]=0;
     			}
              int[][] SDAM=new int[vertices][vertices];
              for(int i=0;i<vertices;i++){
                  SDAM[i]=Dijkstra.getShortestDistArray(dist,i,1);
                  for(int j=0;j<vertices;j++) {
                 	if(distAdjMatrix[i][j]!=0) {
+                	if(SDAM[i][j]!=INFINITY) {
                 	 int n= SDAM[i][j]- distance[i] + distance[j];
                  	 SDAM[i][j]=n;
                 	}  
+                	}
                  }
              }
              return SDAM;
@@ -52,16 +52,14 @@ public class Johnson implements AllPairShortestPath{
 		for(int i=0;i<=source;i++)
 			for(int m=0;m<=source;m++)
 				for(int n=0;n<=source;n++)
-				{	if(m!=n&& dist[m][n]!=INFINITY)
+				{	if(m!=n && dist[m][n]!= INFINITY)
 						if((distance[m]+dist[m][n]) < distance[n])
 							distance[n]=distance[m]+dist[m][n];					
 				}
-		for(int i=0;i<=source;i++)
-		//System.out.println(distance[i]);
 		for(int m=0;m<source;m++)
 			for(int n=0;n<source;n++)
 			{	if(m!=n && dist[m][n]!=INFINITY)
-				{	//System.out.println(m+"   "+n+"\n" + distance[m]+"  "+dist[m][n]+"  "+distance[n]);
+				{	
 					if(distance[n] > (distance[m]+dist[m][n]))
 						return false;				
 				}
