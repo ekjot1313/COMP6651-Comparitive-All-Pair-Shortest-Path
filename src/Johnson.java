@@ -23,8 +23,7 @@ public class Johnson implements AllPairShortestPath{
         distance[source]=0;
         boolean b=BellmanFord(dist,vertices,distance);
         if (b== true)
-        {
-        	for(int m=0;m<vertices;m++)
+        {	for(int m=0;m<vertices;m++)
     			for(int n=0;n<vertices;n++)
     			{	if(m!=n && dist[m][n]!=INFINITY)
     						dist[m][n]=	dist[m][n] + distance[m] - distance[n];	

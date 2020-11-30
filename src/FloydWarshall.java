@@ -14,7 +14,6 @@ public class FloydWarshall implements AllPairShortestPath {
                 for (int j = 0; j < vertices; j++)
                 	if( dist[i][k]!=INFINITY && dist[k][j]!=INFINITY )
                         dist[i][j] = Math.min(dist[i][j], dist[i][k] + dist[k][j]);
-
         return dist;
     }
 }

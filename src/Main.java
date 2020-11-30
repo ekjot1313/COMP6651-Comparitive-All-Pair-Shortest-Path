@@ -43,7 +43,6 @@ public class Main {
             System.out.println();
         }
     }
-
     private static int[][] getDistAdjMatrixFromDataset() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(pathToDataset));
         String line = br.readLine().trim();
@@ -66,7 +65,6 @@ public class Main {
             }
             return distAdjMatrix;
         }
-
         return new int[0][];
     }
 }
