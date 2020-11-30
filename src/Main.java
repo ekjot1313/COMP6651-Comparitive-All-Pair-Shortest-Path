@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class Main {
     static final String pathToDataset = "dist.txt";
     static int vertices = 0;
-
+    static final int INFINITY = Integer.MAX_VALUE;
     public static void main(String[] args) throws IOException {
         int[][] distAdjMatrix = getDistAdjMatrixFromDataset();
 
@@ -35,12 +35,14 @@ public class Main {
         int v = matrix.length;
         for (int i = 0; i < v; i++) {
             for (int j = 0; j < v; j++) {
-                System.out.print(matrix[i][j] + " ");
+            	if( matrix[i][j]!= INFINITY)
+            		System.out.print(matrix[i][j] + " ");
+            	else
+            		System.out.print("U ");
             }
             System.out.println();
         }
     }
-
     private static int[][] getDistAdjMatrixFromDataset() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(pathToDataset));
         String line = br.readLine().trim();
@@ -56,9 +58,13 @@ public class Main {
                     distAdjMatrix[i] = Arrays.stream(line.replaceAll(" +"," ").split(" ")).mapToInt(Integer::parseInt).toArray();
                 }
             }
+            for (int m = 0; m < vertices; m++) {
+            	 for (int n = 0; n < vertices; n++) 
+            		 if(m!=n && distAdjMatrix[m][n]==0)
+            			 distAdjMatrix[m][n]=INFINITY;
+            }
             return distAdjMatrix;
         }
-
         return new int[0][];
     }
 }
