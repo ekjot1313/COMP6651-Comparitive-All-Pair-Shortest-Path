@@ -4,16 +4,17 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class Main {
-    static final String pathToDataset = "ha30_dist.txt";
+    static final String pathToDataset = "usca312_dist.txt";
     static int vertices = 0;
     static final int INFINITY = Integer.MAX_VALUE;
     public static void main(String[] args) throws IOException {
+        System.gc();
         int[][] distAdjMatrix = getDistAdjMatrixFromDataset();
 
-        System.out.println("Original Adjacency Matrix:");
-        printMatrix(distAdjMatrix);
+//        System.out.println("Original Adjacency Matrix:");
+//        printMatrix(distAdjMatrix);
 
-        System.out.println("\nNumber of vertices: "+distAdjMatrix[0].length);
+//        System.out.println("\nNumber of vertices: "+distAdjMatrix[0].length);
 
         AllPairShortestPath dijkstra = new AllPairDijkstra();
         AllPairShortestPath floydWarshall = new FloydWarshall();
@@ -34,16 +35,16 @@ public class Main {
         long endDTime = System.nanoTime();
         long totalDTime = endDTime - startDTime; //calculate runtime of Dijkstra's algorithm
 
-        System.out.println("\nDijkstra:");
-        printMatrix(d_SDAM);
+//        System.out.println("\nDijkstra:");
+//        printMatrix(d_SDAM);
         System.out.println("Runtime of Dijkstra: "+totalDTime+" nanoseconds");
 
-        System.out.println("\nFloyd-Warshall:");
-        printMatrix(fw_SDAM);
+//        System.out.println("\nFloyd-Warshall:");
+//        printMatrix(fw_SDAM);
         System.out.println("Runtime of Floyd-Warshall: "+totalFWTime+" nanoseconds");
 
-        System.out.println("\nJohnson:");
-        printMatrix(j_SDAM);
+//        System.out.println("\nJohnson:");
+//        printMatrix(j_SDAM);
         System.out.println("Runtime of Johnson: "+totalJTime+" nanoseconds");
     }
 

@@ -1,13 +1,13 @@
 public class Dijkstra {
     static final int INFINITY = Integer.MAX_VALUE;
 
-    static int[] getShortestDistArray(int[][] distAdjMatrix, int sourceVertex,int flag) {
-        int vertices = distAdjMatrix.length;
-        if(flag==1)
-        //initializing all distances to infinity
-        	vertices = distAdjMatrix.length-1;
+    static int[] getShortestDistArray(int[][] distAdjMatrix, int sourceVertex, int flag) {
+        int vertices;
+        if (flag == 1)
+            //initializing all distances to infinity
+            vertices = distAdjMatrix.length - 1;
         else
-        		vertices = distAdjMatrix.length;
+            vertices = distAdjMatrix.length;
         int[] dist = new int[vertices];
         boolean[] spt = new boolean[vertices];
         for (int i = 0; i < vertices; i++)
@@ -19,17 +19,17 @@ public class Dijkstra {
         for (int i = 0; i < vertices; i++) {
             //get minimum distance vertex
             int minVertex = getMinVertex(spt, dist);
-            if (minVertex==-1)
-            	break;
+            if (minVertex == -1)
+                break;
             spt[minVertex] = true;
             //update its neighbours' distance
             for (int j = 0; j < vertices; j++) {
-                    if (spt[j] == false && distAdjMatrix[minVertex][j] != INFINITY) {
-                        int newDistFromSource = distAdjMatrix[minVertex][j] + dist[minVertex];
-                        if (newDistFromSource < dist[j]) {
-                            dist[j] = newDistFromSource;
-                        }
+                if (!(spt[j] || distAdjMatrix[minVertex][j] == INFINITY)) {
+                    int newDistFromSource = distAdjMatrix[minVertex][j] + dist[minVertex];
+                    if (newDistFromSource < dist[j]) {
+                        dist[j] = newDistFromSource;
                     }
+                }
             }
         }
         return dist;
@@ -41,7 +41,7 @@ public class Dijkstra {
         int minV = -1;
 
         for (int i = 0; i < spt.length; i++) {
-            if (spt[i] == false && dist[i] < minDist) {
+            if (!spt[i] && dist[i] < minDist) {
                 minDist = dist[i];
                 minV = i;
             }
