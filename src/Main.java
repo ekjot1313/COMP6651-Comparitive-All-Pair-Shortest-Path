@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class Main {
-    static final String pathToDataset = "dist.txt";
+    static final String pathToDataset = "ha30_dist.txt";
     static int vertices = 0;
     static final int INFINITY = Integer.MAX_VALUE;
     public static void main(String[] args) throws IOException {
@@ -12,6 +12,8 @@ public class Main {
 
         System.out.println("Original Adjacency Matrix:");
         printMatrix(distAdjMatrix);
+
+        System.out.println("\nNumber of vertices: "+distAdjMatrix[0].length);
 
         AllPairShortestPath dijkstra = new AllPairDijkstra();
         AllPairShortestPath floydWarshall = new FloydWarshall();
