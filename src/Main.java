@@ -17,18 +17,32 @@ public class Main {
         AllPairShortestPath floydWarshall = new FloydWarshall();
         AllPairShortestPath johnson = new Johnson();
 
-        
+        long startFWTime = System.nanoTime();
         int[][] fw_SDAM = floydWarshall.getShortestDistAdjMatix(distAdjMatrix);
+        long endFWTime = System.nanoTime();
+        long totalFWTime = endFWTime - startFWTime; //calculate runtime of Floyd-Warshall algorithm
+
+        long startJTime = System.nanoTime();
         int[][] j_SDAM = johnson.getShortestDistAdjMatix(distAdjMatrix);
+        long endJTime = System.nanoTime();
+        long totalJTime = endJTime - startJTime; //calculate runtime of Johnson's algorithm
+
+        long startDTime = System.nanoTime();
         int[][] d_SDAM = dijkstra.getShortestDistAdjMatix(distAdjMatrix);
+        long endDTime = System.nanoTime();
+        long totalDTime = endDTime - startDTime; //calculate runtime of Dijkstra's algorithm
+
         System.out.println("\nDijkstra:");
         printMatrix(d_SDAM);
+        System.out.println("Runtime of Dijkstra: "+totalDTime+" nanoseconds");
 
         System.out.println("\nFloyd-Warshall:");
         printMatrix(fw_SDAM);
-  
+        System.out.println("Runtime of Floyd-Warshall: "+totalFWTime+" nanoseconds");
+
         System.out.println("\nJohnson:");
         printMatrix(j_SDAM);
+        System.out.println("Runtime of Johnson: "+totalJTime+" nanoseconds");
     }
 
     private static void printMatrix(int[][] matrix) {
