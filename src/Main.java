@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class Main {
-    static final String pathToDataset = "usca312_dist.txt";
+    static final String pathToDataset = "dist.txt";
     static int vertices = 0;
     static final int INFINITY = Integer.MAX_VALUE;
     public static void main(String[] args) throws IOException {
@@ -40,7 +40,7 @@ public class Main {
         System.out.println("Runtime of Dijkstra: "+totalDTime+" nanoseconds");
 
 //        System.out.println("\nFloyd-Warshall:");
-//        printMatrix(fw_SDAM);
+//       printMatrix(fw_SDAM);
         System.out.println("Runtime of Floyd-Warshall: "+totalFWTime+" nanoseconds");
 
 //        System.out.println("\nJohnson:");

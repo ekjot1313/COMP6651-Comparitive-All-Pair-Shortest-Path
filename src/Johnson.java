@@ -6,6 +6,7 @@ public class Johnson implements AllPairShortestPath{
     	int source;
     	int[] distance= new int[vertices+1];
         int[][] dist = new int[vertices+1][vertices+1];
+        // Marking edges with distance 0 as infinity except if it is the distance to itself
         for (int i = 0; i < vertices; i++)
             for (int j = 0; j < vertices; j++)
             {	if(i!=j && distAdjMatrix[i][j]==0)
@@ -13,20 +14,20 @@ public class Johnson implements AllPairShortestPath{
             	else
             		dist[i][j] = distAdjMatrix[i][j];
             }
+        //Adding an extra vertex with an edge to all the other vertices with cost 0.
         for(int k=0;k<=vertices;k++)
         {	dist[vertices][k]=0;
         	dist[vertices][k]=INFINITY;
         }
-        source=vertices;
+        source=vertices;//making the newly added vertex as source
         for(int i=0;i<=source;i++)
 			distance[i]=0;
-        distance[source]=0;
-        boolean b=BellmanFord(dist,vertices,distance);
+        boolean b=BellmanFord(dist,vertices,distance); //checking for negative edge cycle
         if (b== true)
         {	for(int m=0;m<vertices;m++)
     			for(int n=0;n<vertices;n++)
     			{	if(m!=n && dist[m][n]!=INFINITY)
-    						dist[m][n]=	dist[m][n] + distance[m] - distance[n];	
+    						dist[m][n]=	dist[m][n] + distance[m] - distance[n];	//making all the costs >=0 so that Dijkstra can be executed on it.
     			}
              int[][] SDAM=new int[vertices][vertices];
              for(int i=0;i<vertices;i++){
@@ -34,7 +35,7 @@ public class Johnson implements AllPairShortestPath{
                  for(int j=0;j<vertices;j++) {
                 	if(distAdjMatrix[i][j]!=0) {
                 	if(SDAM[i][j]!=INFINITY) {
-                	 int n= SDAM[i][j]- distance[i] + distance[j];
+                	 int n= SDAM[i][j]- distance[i] + distance[j]; // rolling back to the original costs.
                  	 SDAM[i][j]=n;
                 	}  
                 	}
@@ -47,7 +48,7 @@ public class Johnson implements AllPairShortestPath{
         	return null;
     }
 	private boolean BellmanFord(int[][] dist, int source,int[] distance) {
-		// TODO Auto-generated method stub
+		
 		for(int i=0;i<=source;i++)
 			for(int m=0;m<=source;m++)
 				for(int n=0;n<=source;n++)
@@ -59,7 +60,7 @@ public class Johnson implements AllPairShortestPath{
 			for(int n=0;n<source;n++)
 			{	if(m!=n && dist[m][n]!=INFINITY)
 				{	
-					if(distance[n] > (distance[m]+dist[m][n]))
+					if(distance[n] > (distance[m]+dist[m][n]))// check for negative edge cycle.
 						return false;				
 				}
 			}
