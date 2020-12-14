@@ -1,3 +1,5 @@
+package Lib;
+
 public class Dijkstra {
     static final int INFINITY = Integer.MAX_VALUE;
 
